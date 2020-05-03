@@ -14,9 +14,9 @@ import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataM
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
+import java.util.*
 
 @SpringBootTest
-
 @ActiveProfiles("test")
 @AutoConfigureDataMongo
 class FuncionarioServiceTest {
@@ -36,7 +36,7 @@ class FuncionarioServiceTest {
     fun setUp() {
         BDDMockito.given(funcionarioRepository?.save(Mockito.any(Funcionario::class.java)))
                 .willReturn(funcionario())
-        BDDMockito.given(funcionarioRepository?.findById(id)?.get()).willReturn(funcionario())
+        BDDMockito.given(funcionarioRepository?.findById(id)).willReturn(Optional.of(funcionario()))
         BDDMockito.given(funcionarioRepository?.findByEmail(email)).willReturn(funcionario())
         BDDMockito.given(funcionarioRepository?.findByCpf(cpf)).willReturn(funcionario())
     }
